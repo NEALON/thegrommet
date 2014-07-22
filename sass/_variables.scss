@@ -1,0 +1,78 @@
+// ---------------------------------------------------------------------------
+// Variables 
+ 
+// Colours 
+$white          :#ffffff;
+$black          :#000000;
+
+$grey           :#4c4c4c;
+$grey-dark      :#222222;
+$grey-light     :#676767;
+$brown          :#584528;
+$brow-dark      :#412c19;
+$red            :#d44b00;
+$green          :#878800;
+$blue           :#0296d7;
+
+$baseColorText  :$grey;
+
+
+// Typography
+$baseFontFamily     : Georgia, "Times New Roman", Times, serif;
+$baseFontSize       : 13px;
+$baseLineHeight     : 1.4;
+$baseFontWeight     : normal;
+
+$fontSerif            : "IM FELL DW Pica", Georgia, "Times New Roman", Times, serif;
+$fontSansSerif        : Helvetica, Arial, "Helvetica Neue", sans-serif;
+$fontTimes            : "Times New Roman", Times, serif;
+
+// Media queries breakpoints
+// --------------------------------------------------
+
+// Extra small screen / phone
+$screen-xs:                  480px;
+$screen-xs-min:              $screen-xs;
+$screen-phone:               $screen-xs-min;
+
+// Small screen / tablet
+$screen-sm:                  768px;
+$screen-sm-min:              $screen-sm;
+$screen-tablet:              $screen-sm-min;
+
+// Medium screen / desktop
+$screen-md:                  1000px;
+$screen-md-min:              $screen-md;
+$screen-desktop:             $screen-md-min;
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max:              ($screen-sm-min - 1);
+$screen-sm-max:              ($screen-md-min - 1);
+
+
+// Grid system
+// --------------------------------------------------
+
+$total-columns    : 29;
+$column-width     : 23px;
+$gutter-width     : 10px;
+$grid-padding     : 15px;
+$container-style  : magic;
+$container-width  : 960px;
+
+$show-grid-backgrounds  : true;
+
+
+// Container sizes
+// --------------------------------------------------
+
+// Small screen / tablet
+$container-tablet:             ((720px + $grid-padding * 2));
+$container-sm:                 $container-tablet;
+
+// Medium screen / desktop
+$container-desktop:            ((960px + $grid-padding * 2));
+$container-md:                 $container-desktop;
+
+$container-width  : $container-desktop;
+

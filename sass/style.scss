@@ -1,0 +1,802 @@
+/*!
+ * Tidal
+ * Project: The Grommet
+ * Date: 11132013
+ * 
+ * Author: Eugene Tsurcan 
+ * Front End Developer 
+ * [http://twitter.com/eugenetsurcan] 
+ *  
+ */
+
+
+// ---------------------------------------------------------------------------
+// Imports
+
+@import "compass";
+@import "susy"; 
+@import "mixins";
+@import "variables";
+
+
+/* ==========================================================================
+   Reset CSS
+   ========================================================================== */
+  
+@import "compass/reset";
+
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+body { background: #fff9ec image-url("bg-texture.png"); color: $baseColorText; font: {family: $baseFontFamily; size: $baseFontSize; weight: $baseFontWeight;} line-height: $baseLineHeight; }
+
+hr { background: none transparent; border: 1px solid #736856; border-width: 1px 0 0; @include border-image(image-url("border.png") 1 1 1 1 repeat); margin: {bottom: 40px; top: 35px;} }
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+/* Container */  
+.container { @include container; /*@include susy-grid-background;*/ @include micro-clearfix; }
+
+/* Content Page (With Sidebar) */
+.content-page { margin-top: 20px; @include micro-clearfix; 
+  > section { margin-bottom: 20px; float: left; width: columns(21) + gutter(29); @include micro-clearfix; } 
+  
+  /* Right Sidebar */
+  > aside { margin-bottom: 20px; @include span-columns(7 omega); @include micro-clearfix; 
+    > section { margin: {bottom: 40px; left: auto; right: auto;} max-width: 100%; width: 224px; @include micro-clearfix; }
+    h6 { color: #333333; line-height: 1.5; margin: {top: 5px; bottom: 10px;} text-align: center; }
+  }
+}
+
+/* Row */
+.row { clear: both; @include micro-clearfix; }
+
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+  
+a { background-color: transparent; color: $red; cursor: pointer; outline: 0; text-decoration: underline; @include transition(#{all .3s});
+  &:hover, &:active, &:focus, &.active { background-color: transparent; color: lighten($red, 10%); cursor: pointer; text-decoration: none; }
+  * { cursor: pointer; }
+}
+
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+  
+.btn { background: none transparent; background-repeat: repeat-x!important; border: 0 none; cursor: pointer; @include inline-block; font: {family: $baseFontFamily; size: 11px; weight: bold;} line-height: 1.1; margin: 0 0 15px; outline: none; overflow: visible; padding: 0; position: relative; text: {align: center; decoration: none;} @include transition(#{all .3s}); vertical-align: middle; width: auto; 
+  &:hover, &:focus { outline: none; text-decoration: none; }
+  
+  /* Share Button */
+  &.btn-share { background: $blue; color: $white; padding: 9px 13px; text-transform: uppercase; @include transition(#{none});
+    &:hover, &:focus { background: darken($blue, 10%); 
+      &:after { border-top-color: darken($blue, 10%); }
+    }
+    > span { font-size: 12px; line-height: 0; position: relative; top: -1px; }
+    .fa { font-size: 11px; margin: 0 5px 0 1px; position: relative; top: 1px; }
+    
+    /* Triangle Top Left */
+    &:after { border: {top: 10px solid $blue; right: 10px solid transparent;} content: ''; height: 0; left: 50%; margin-left: -5px; position: absolute; top: 100%; width: 0; }
+  } 
+  
+  /* Orange Button (as Subscribe) */
+  &.btn-orange { background: $red; color: $white; padding: 9px 13px; 
+    &:hover, &:focus { background: lighten($red, 10%); }
+  }
+  
+  /* Circle Button (as Load More) */
+  &.btn-circle { background: #98cbea; @include border-radius(#{60px}); color: $white; padding: 18px 0; text: {align: center; transform: uppercase;} width: 60px;
+    &:hover, &:focus { background: darken(#98cbea, 10%); }
+  }
+}
+
+/* Close button */
+.close { font-family: $fontSansSerif; }
+
+/* Correct FF button padding */
+@-moz-document url-prefix() {
+  input[type="submit"].btn::-moz-focus-inner { border: 0 none; padding: 0; margin: -2px 0; }
+}
+
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+  
+small { font-size: 87.5%; }
+
+p { margin: 0 0 15px 0; }
+
+i { font-style: italic; }
+
+strong { font-weight: bold; }
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { color: #484848; font: {family: $fontSerif; weight: normal;} line-height: 1.2; 
+  a { color: #484848; text-decoration: none; 
+    &:hover, &:focus { color: $red; text-decoration: underline; }
+  }
+}
+
+h2, h3, .h1, .h2, .h3 { margin: {top: 20px; bottom: 10px;} }
+h5, h6, .h5, .h6 { margin: {top: 10px; bottom: 10px;} }
+
+h1, .h1 { color: $baseColorText; font-size: 47px; margin: {top: 13px; bottom: 13px;} 
+  a { color: $baseColorText; }
+}
+h2, .h2 { font-size: 38px; }
+h3, .h3 { color: $black; font-size: 26px; text-transform: uppercase; 
+  a { color: $black; }
+}
+h4, .h4 { color: $baseColorText; font-size: 25px; margin: {bottom: 15px; top: 15px;} }
+h5, .h5 { color: $black; font-size: 16px; text-transform: uppercase; 
+  a { color: $black; }
+}
+h6, .h6 { color: $grey-light; font: {family: $baseFontFamily; size: 12px; weight: bold;} text-transform: uppercase; 
+  a { color: $grey-light; }
+}
+
+time { font: {style: italic; weight: normal;} }
+
+.muted { color: $grey-light; }
+
+/* Leader text */
+.lead { font-size: 14px; margin-bottom: 20px; }
+
+/**
+ * List Styles into Content
+ */
+ul, ol { text-align: left; 
+  li { margin-bottom: 15px; }
+}
+
+ul { list-style-type: disc; margin: 15px 0 20px 16px; }
+
+ol { list-style-type: decimal; margin: 15px 0 20px 22px; }
+
+ul ul, ol ul { list-style-type: circle; }
+
+/* List Unstyled */
+.list-unstyled { line-height: inherit; list-style: none; margin: 0; 
+  li { margin: 0; }
+}
+
+/**
+ * Icons
+ */
+.fa { font-family: 'FontAwesome'!important; }
+
+/**
+ * Label
+ */
+.label { background: $blue; color: $white; @include inline-block; font: {family: $baseFontFamily; size: 11px; weight: bold;} line-height: 1.1; padding: 7px 9px; text-transform: uppercase; }
+
+/**
+ * Font Face
+ */
+
+/* Font Serif */
+@include font-face("IM FELL DW Pica", font-files("imfepirm28p.ttf", "imfepirm28p.woff", "imfepirm28p.eot", "imfepirm28p.svg#im_fell_dw_picaregular"), false, 400, normal);
+
+/* Font Serif Italic */
+@include font-face("IM FELL DW Pica", font-files("imfepiit28p.ttf", "imfepiit28p.woff", "imfepiit28p.eot", "imfepiit28p.svg#im_fell_dw_picaitalic"), false, 400, italic);
+
+
+/* ==========================================================================
+   Embedded content
+   ========================================================================== */
+
+img { border: 0; display: block; height: auto; max-width: 100%; vertical-align: middle; width: auto\9; -ms-interpolation-mode: bicubic; }
+  
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+
+/**
+ * Normalize non-controls
+ * 
+ * Restyle and baseline non-control form elements.
+ */
+form { margin: 0 0 15px; }
+
+fieldset { padding: 0; margin: 0; border: 0; }
+
+legend { border: 0 none; border-bottom: 1px solid #736856; @include border-image(image-url("border.png") 1 1 1 1 repeat); color: $black; display: block; font: {family: $fontSerif; size: 18px; weight: normal;} line-height: inherit; margin-bottom: 15px; padding: 0; width: 100%; }
+
+label { display: inline-block; font: {size: 12px; weight: bold;} margin-bottom: 5px; }
+
+
+/**
+ * Normalize form controls
+ */
+
+/* Override content-box in Normalize (* isn't specific enough) */
+input[type="search"] { @include box-sizing(#{border-box}); }
+
+/* Position radios and checkboxes better */
+input[type="radio"], input[type="checkbox"] { margin: 4px 0 0; margin-top: 1px \9; line-height: normal; }
+
+/* Set the height of select and file controls to match text inputs */
+input[type="file"] { display: block; }
+
+/* Make multiple select elements height not fixed */
+select[multiple], select[size] { height: auto; }
+
+/* Fix optgroup Firefox bug per */
+select optgroup { font: {family: inherit; size: inherit; style: inherit;} }
+
+/* Focus for select, file, radio, and checkbox */
+input[type="file"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focus { outline: thin dotted #333; outline: 5px auto -webkit-focus-ring-color; outline-offset: -2px; }
+
+/* Fix for Chrome number input */
+input[type="number"] {
+  &::-webkit-outer-spin-button, &::-webkit-inner-spin-button { height: auto; }
+}
+
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"],
+input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"],
+input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+  @include border-radius(#{3px});
+  border: 1px solid #8d8d8d;
+  @include box-shadow(#{inset 1px 1px 3px rgba(#8d8d8d, .7)});
+  color: $baseColorText;
+  @include inline-block;
+  font: {size: pem($baseFontSize); family: $baseFontFamily;}
+  height: 30px;
+  margin: 0 0 15px;
+  padding: 6px 8px;
+  vertical-align: top;
+}
+
+select { line-height: 24px; }
+
+textarea { height: auto; resize: vertical; }
+
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"],
+input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"],
+input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+  @include box-sizing(#{border-box});
+  background-color: #f5f5f5;
+  @include transition(#{background-color .3s, border-color .3s});
+  width: 100%;  
+
+  // Focus state
+  &:focus {
+    background: $white;
+    outline: 0!important;
+    outline: thin dotted!important \9;
+    @include transition(#{background-color .08s, border-color .08s});
+  }
+}
+
+// Placeholder
+::-webkit-input-placeholder   { color: #929292; font-style: italic; }
+input:-moz-placeholder        { color: #929292; font-style: italic; }
+
+  
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+  
+
+/* ==========================================================================
+   Sprites
+   ========================================================================== */
+  
+@import "sprites/*.png";
+@include all-sprites-sprites;
+
+
+/* ==========================================================================
+   Header CSS
+   ========================================================================== */
+  
+.header { background: #c2b6a4 image-url("bg-texture.png"); clear: both; padding-top: 32px; text-align: center; 
+  > div { background: #fff9ec image-url("bg-texture.png"); border-top: 1px solid #736856; @include border-image(image-url("border.png") 1 1 1 1 repeat); }
+  
+  /* Logotype */
+  h1 { float: right; line-height: 48px; margin: 0; 
+    img { @include inline-block; }
+  }
+  h2 { color: $brow-dark; @include squish(4, 4, 24); }
+}
+  
+
+/* ==========================================================================
+   Navigation CSS
+   ========================================================================== */
+  
+/* Menu Main */
+.menu { background: $white image-url("bg-white.gif"); border: 1px solid #736856; border-width: 1px 0; @include border-image(image-url("border.png") 1 1 1 1 repeat); position: relative; @include transition(#{all .3s}); @include micro-clearfix; z-index: 5; 
+  a { color: $black; display: block; font: {family: $baseFontFamily; size: 12px; weight: bold;} padding: 15px 10px 15px 0; text: {decoration: none; transform: uppercase;} }
+  
+  ul { @include micro-clearfix; 
+    li { float: left; position: relative; z-index: 2;
+      + li a { padding: 15px 10px; }
+      
+      /* Show Submenu */
+      &:hover ul { display: block; 
+        a { color: $black; }
+      }
+    }
+  }
+  
+  /* Submenu */
+  ul ul { background: $white image-url("bg-white.gif"); border: 1px solid #736856; border-width: 0 1px 1px 1px; @include border-image(image-url("border.png") 1 1 1 1 repeat); @include box-shadow(#{3px 3px 6px -2px lighten($black, 70%)}); display: none; left: 50%; margin-left: -68px; padding-bottom: 8px; position: absolute; text-align: center; top: 100%; width: 136px; 
+    li { float: none;
+      a { padding: 0 10px 8px; }
+      + li a { padding: 8px 10px; }
+    }    
+  }
+  
+  /* Active/Hover Menu */
+  li:hover a { color: $red; }
+  a:hover, a.active, .active a { color: $red!important; }
+  
+  /* Active/Hover Submenu */
+  ul .active ul { 
+    a { color: $black!important; }
+    a:hover, a.active, .active a { color: $red!important; }
+  }
+  
+  /* Search Form */
+  .search-form { float: none; margin: {top: 8px;} z-index: 1;
+    form { margin: 0; }
+    .input-group { margin: {bottom: 0; left: 15px;} 
+      .btn { display: none; }
+      .wrap-input input { background: $white; border-color: #a69d8d; @include border-radius(#{0}); @include box-shadow(#{none}); float: right; margin: 0; max-width: 220px;
+        &:focus { border-color: $red; } 
+      }
+    }
+  }
+}
+
+/* Off-Canvas Navigation */
+.off-canvas-navigation { background: $white image-url("bg-white.gif"); border: 1px solid #736856; border-width: 1px 0; @include border-image(image-url("border.png") 1 1 1 1 repeat); display: none; position: relative; z-index: 5; 
+  a { color: $black; display: block; font: {family: $baseFontFamily; size: 15px; weight: bold;} padding: 12px 0; text: {decoration: none; transform: uppercase;} 
+    &:hover, &:focus { color: $red; }
+  }
+  .fa { font-size: 17px; min-width: 20px; }
+  .fa-times { display: none; }
+}
+
+.active-nav .off-canvas-navigation {
+  a { color: $red; }
+  .fa-bars { display: none; }
+  .fa-times { display: inline-block; }
+}
+
+
+/* ==========================================================================
+   Main CSS
+   ========================================================================== */
+
+/**
+ * Wrapper Content
+ */
+.wrapper-content { background: $white; float: left; margin-left: 0; overflow-x: hidden; padding-bottom: 40px; @include transition(#{all .3s}); width: 100%; @include micro-clearfix; }
+
+/**
+ * Masthead
+ */
+.masthead { background: {image: image-url("mh-border-top.gif"); position: top left; repeat: repeat-x;} color: $black; font: {family: $fontSerif; size: 18px;} line-height: 1.2; margin-bottom: 30px; overflow: hidden; padding-top: 26px; position: relative; text-align: center;
+  > div { background: {image: image-url("mh-border-bottom.gif"); position: bottom left; repeat: repeat-x;} padding-bottom: 26px; }
+  .inner { background: {image: image-url("mh-bg.gif"); position: top left; repeat: repeat;} @include box-shadow(#{inset 0 0 70px rgba(0,0,0,.5)}); position: relative; }
+  h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 { color: $black; }
+  h3 { font-size: 56px; margin-bottom: 0; }
+  h4 { margin: {bottom: 15px; top: 7px;} }
+  .container { padding-bottom: 10px; }
+  .mh-shadow { background: rgba(0,0,0,.16); @include box-shadow(#{-34px 0 109px rgba(0,0,0,0.2)}); height: 100%; position: absolute; right: 0; top: 0; width: 41%; }
+}
+
+/* Wrapper Load More */
+.wrapper-load-more { margin-left: columns(8, 21); text-align: center; }
+  
+/**
+ * Slider Styles (Basic Swiper Styles)
+ */
+.swiper-container { @include backface-visibility(#{hidden}); margin: 0 auto; overflow: hidden; position: relative; z-index:1; }
+
+.swiper-wrapper { position: relative; @include transition(#{all easy}); @include translate3d(0px, 0, 0); width: 100%; }
+.swiper-free-mode > .swiper-wrapper { @include transition(#{all ease-out}); margin: 0 auto; }
+.swiper-slide { float: left; }
+
+/* IE10 Windows Phone 8 Fixes */
+.swiper-wp8-horizontal { -ms-touch-action: pan-y; }
+.swiper-wp8-vertical { -ms-touch-action: pan-x; }
+
+/* Slider Scrollbar */
+.swiper-scrollbar { @include border-radius(#{10px}); @include box-shadow(#{inset 0 2px 5px #6e6557}); height: 5px; margin: 30px 0; }
+
+.no-boxshadow .swiper-scrollbar { background: #6e6557; }
+
+.swiper-scrollbar-drag { @extend .sprites-scrollbar-drag; height: 20px; position: relative; top: -17px!important; width: 44px; }
+
+.swiper-scrollbar-cursor-drag { cursor: move; }
+
+/**
+ * Hero (Homeslider)
+ */
+.hero { border-bottom: 1px solid #736856; @include border-image(image-url("border.png") 1 1 1 1 repeat); margin-bottom: 50px; overflow: hidden; padding: 0 $grid-padding; position: relative; 
+  .swiper-container { overflow: visible; max-width: 900px; padding: 0; }
+  
+  .swiper-slide { min-height: 480px; @include opacity(.75); position: relative;    
+    /* Visible/Active Slide */
+    &.swiper-slide-visible, &.swiper-slide-active { @include opacity(1); }
+    
+    > p { margin-bottom: 0; }
+  }
+  
+  .border-right { border-right: 1px solid #736856; @include border-image(image-url("border.png") 1 1 1 1 repeat); height: 100%; width: 0; position: absolute; right: 0; top: 0; z-index: -1; }
+  
+  .description { color: $grey-light; font-size: 12px; margin: {right: 10px; left: 20px;} padding: {top: 20px; bottom: 10px;} position: relative; @include micro-clearfix; 
+    h3 { font-size: 20px; margin: {top: 0; bottom: 0;} }
+    
+    img { margin-top: 5px; }
+    .media-body { margin-top: 10px; }
+    
+    &:before { content: ''; border: {left: 12px solid transparent; right: 12px solid transparent; bottom: 15px solid $white;} bottom: 100%; display: block; height: 0; left: 0; position: absolute; width: 0; }
+  } 
+  
+  /* Button Next and Prev */
+  .sprites-arrow-left, .sprites-arrow-right { position: absolute; top: 105px; z-index: 3; }
+  .sprites-arrow-left { left: -14px; }
+  .sprites-arrow-right { right: -14px; }
+}
+
+/**
+ * Arrows (Next, Prev)
+ */
+.sprites-arrow-left, .sprites-arrow-right { display: block; height: 59px; @include hide-text; width: 29px; }
+
+/**
+ * Media and Input Group
+ */
+.media {
+  > .pull-left { margin-right: 10px; }
+  > .pull-right { margin-left: 10px; }
+}
+
+.media, .media-body, .input-group, .wrap-input { overflow: hidden; *overflow: visible; zoom: 1; }
+
+/* Input Group */
+.input-group { margin-bottom: 15px;
+  .btn, input { margin-bottom: 0; }
+  .btn { @include border-radius(#{0 3px 3px 0}); @include box-sizing(#{border-box}); height: 30px; }
+  .wrap-input input { @include border-radius(#{3px 0 0 3px}); }
+}
+
+/**
+ * Well
+ */
+.well { background: #fff9ec image-url("bg-texture.png"); border: 1px solid #736856; @include border-image(image-url("border.png") 1 1 1 1 repeat); color: $grey; font-size: 11px; margin-bottom: 20px; padding: 10px 25px; @include micro-clearfix; 
+  &.well-large { padding: {top: 27px; bottom: 45px;} }
+  img { margin: 0 auto; }
+  h5 { text-align: center; }
+  a { letter-spacing: -1px; word-spacing: 2px; }
+}
+
+/**
+ * Two cols posts (as on Citizen Commerce 2)
+ */
+.two-cols-posts { margin-right: 25px; @include micro-clearfix;
+  @include with-grid-settings(2, 288px, 25px, 0) {
+    .col { @include span-columns(1); @include nth-omega('2n'); }
+  }
+}
+
+/**
+ * Three cols posts (as on Contest)
+ */
+.three-cols-posts { @include micro-clearfix;
+  @include with-grid-settings(3, 288px, 25px, 0) {
+    .col { @include span-columns(1); @include nth-omega('3n'); }
+  }
+}
+
+/**
+ * Post Item
+ */
+.post-item { margin-bottom: 25px; @include micro-clearfix;
+  + .post-item { margin-top: 30px; }
+
+  /* Wrapper Images */
+  .wrapper-images { width: columns(5, 9); 
+    .post-img { float: left; text-align: right; width: 75%; 
+      img { @include inline-block; }
+    }
+    .post-products { float: left; width: 25%; @include micro-clearfix; }
+    
+    &:hover img { @include opacity(.9);
+      &:hover { @include opacity(1); }
+    }
+  }
+  
+  /* Description */
+  .description { color: $grey-light; font-size: 12px; 
+    h5 { margin: {top: -3px; bottom: 5px;} }
+    .post-by { color: #484848; 
+      a { color: #484848; text-decoration: none; 
+        &:hover, &:focus { color: $red; text-decoration: underline; }
+      }
+    }
+    p { margin-bottom: 10px; }
+  }
+  
+  time { margin-left: 10px; }
+  
+  /* Small Post (as on Contests page) */
+  &.post-small { margin: {bottom: 15px; top: 15px;}
+    .wrapper-images { max-width: 100%; width: 288px;
+      &, .post-products { display: block; float: none; }
+      
+      /* Products and Share (3 cols) */
+      .post-products { margin-bottom: 23px; position: relative; width: auto;
+        > li { float: left; min-height: 1px; width: 33%; @include nth-omega('3n');
+          &:first-child { width: 34%; }
+        }
+      }
+    }
+    
+    /* Button Share */
+    .btn-share { font-size: 12px; height: 100%; left: 0; padding: 0; position: absolute; top: 0; width: 34%; 
+      > span { display: block; font: {family: $baseFontFamily; size: 20px; weight: normal;} margin: {bottom: 15px; top: 26px;} 
+        .fa { font-size: 16px; margin: 0 0 0 3px; position: relative; top: 2px; }
+      }
+      
+      /* Triangle Top Left */
+      &:after { border: {left: 10px solid transparent; right: 10px solid transparent; top-width: 14px;} margin-left: -10px; }
+    }
+  }
+}
+
+/* Post Heading */
+.post-heading { margin: {right: columns(8); top: 0;} padding-right: 137px; }
+
+/**
+ * Post Page
+ */
+.post-page-wrapper { margin-right: 140px; @include micro-clearfix;
+  .post-page-body { color: $grey-light; float: left; font-size: 12px; line-height: 1.5; width: 100%; }
+  .post-products { float: right; margin-right: -117px; width: 117px;
+    li { margin-bottom: 10px; }
+    &:hover {
+      img { @include opacity(.9); 
+        &:hover { @include opacity(1); }
+      }
+    }
+  }
+}
+
+/**
+ * Post Flip (as on Section page)
+ */
+.post-flip { margin-bottom: 40px; @include micro-clearfix; 
+  /* Top Section */
+  .top-section { color: $grey-light; font-size: 12px; line-height: 1.5; margin: {bottom: 15px; right: (960px - 628px);} @include micro-clearfix; 
+    .wrap-img { float: left; width: 100%; }
+    .description { float: right; margin-right: -(240px + 35px); width: 240px; 
+      h3 { font-size: 20px; margin: {bottom: 35px; top: 30px;} }
+    }
+  }
+
+  /* Bottom Section */
+  .bottom-section { @include micro-clearfix; 
+    @include with-grid-settings(4, 229px, 15px, 0) {
+      li { @include isolate-grid(1); }
+    }
+    
+    figure { margin: {left: auto; right: auto;} max-width: 100%; position: relative; text-align: center; width: 229px; 
+      img { margin: {left: auto; right: auto;} }
+    }
+    
+    figcaption { color: $white; font-size: 20px; height: 100%; left: 0; margin: 0; position: absolute; top: 0; width: 100%; 
+      a, a:hover { color: $white; text-decoration: none; }
+      
+      table { height: 100%; margin: 0; padding: 0; vertical-align: middle; width: 100%; 
+        td { padding: 0 5px; text-align: center; vertical-align: middle; }
+      }
+    }
+    
+    &:hover {
+      figure a img { @include opacity(.9); }
+      figure:hover a img { @include opacity(1); }
+    }
+  }
+}
+
+/* Post Related */
+.content-page > aside .related-posts-widget { margin-bottom: 30px; }
+
+.post-related { color: $grey-light; font-size: 11px; line-height: 1.2; margin: {bottom: 10px; left: auto; right: auto;} max-width: 100%; width: 270px;
+  h5 { color: $grey-dark; font: {family: $baseFontFamily; size: 11px;} line-height: 1.1; margin: {bottom: 0; top: -1px;}
+    a { color: $grey-dark; 
+      &:hover { color: $red; }
+    }
+  }
+  
+  p { margin-bottom: 0; }
+}
+
+/**
+ * Latest Contributors Widget
+ */
+.contributors-widget { text-align: center; 
+  ul { @include inline-block;
+    li { float: left;
+      &:nth-child(4n + 1) { clear: left; }
+    }
+    
+    img { height: 55px; width: 55px; }
+    
+    &:hover img { @include opacity(.9); 
+      &:hover { @include opacity(1); }
+    }
+  }
+}
+
+/**
+ * About Widget
+ */
+.about-widget {
+  h5 { text-align: center; }
+  
+  + .connects-widget { margin-top: -25px; }
+}
+
+/**
+ * Subscribe Widget
+ */
+.subscribe-widget form { margin-left: 25px; }
+
+/**
+ * Connects Widget (Connect With Us)
+ */
+.connects-widget { text-align: center;
+  ul { @include inline-block; }
+  li { float: left; 
+    + li { margin-left: 5px!important; }
+  }
+  a { background: #393939; @include border-radius(4px); color: $white; @include inline-block; height: 20px; text: {align: center; decoration: none;} vertical-align: top; width: 20px; 
+    &:hover { background: $red; }
+  }
+  .fa { font-size: 17px; position: relative; top: 2px; }
+  
+  /* Pinterest */
+  .s-pinterest {
+    a { background: $white; color: #393939;
+      &:hover { background: $white; color: #cb2028;  }
+    }
+    
+    .fa { font-size: 23px; top: -1px; }
+  }
+  
+  /* Instagram */
+  .s-instagram { 
+    a:hover { background: #4a7aa2; }
+    .fa { font-size: 16px; }
+  } 
+  
+  /* Twitter */
+  .s-twitter a:hover { background: #32ccfe; }
+  
+  /* Google */
+  .s-google a:hover { background: #d6492f; }
+  
+  /* Youtube */
+  .s-youtube {
+    .fa { top: 0; font-size: 10px; }
+    a:hover { background: #cf3427; }
+  }
+}
+
+/* Facebook */
+.fb_edge_widget_with_comment span.fb_edge_comment_widget { left: -45px !important; }
+
+/**
+ * Featured Writers
+ */
+.featured-writers { margin: 0 40px 0 0; @include micro-clearfix;
+  @include with-grid-settings(4, 153px, 25px, 0) {
+    > li { @include isolate-grid(1); }
+  }
+
+  /* Name of writer */
+  figure { text-align: center;
+    img { margin: {left: auto; right: auto;} }
+    figcaption { font-size: 16px; height: 50px; line-height: 1.1; margin: {bottom: 12px; top: 12px;} }
+  }
+  
+  /* Large Featured Writers */
+  &.fw-large {
+    @include with-grid-settings(2, 318px, 25px, 0) {
+      > li { @include isolate-grid(1); }
+    }
+    
+    figure figcaption { font-size: 20px; }
+  }
+}
+
+/**
+ * Author Post
+ */
+.author-post {
+  h5 { margin-top: 0; }
+  .description { color: $grey-light; font-size: 12px; line-height: 1.5; margin-bottom: 0; }
+}
+
+/**
+ * Profile Block (wrapper-profile)
+ */
+.wrapper-profile { color: $grey-light; font-size: 12px; line-height: 1.5; margin-right: 65px; @include micro-clearfix;
+  @include with-grid-settings(19, 15px, 20px, 0) {
+    /* Profile Image */
+    .profile-image { @include span-columns(10); }
+    
+    /* Profile Description */
+    .profile-description { @include span-columns(9 omega); }
+    
+    .btn-share { margin-bottom: 10px; }
+  }
+}
+
+
+/* ==========================================================================
+   Modals
+   ========================================================================== */
+
+
+/* ==========================================================================
+   Footer CSS
+   ========================================================================== */
+
+.footer { background: #fff9ec image-url("bg-texture.png"); border-top: 1px solid #736856; @include border-image(image-url("border.png") 1 1 1 1 repeat); clear: both; color: #676767; padding: 20px 0 10px; text-align: center; @include micro-clearfix; 
+  .container > h2 { color: $brow-dark; margin: {top: 0; bottom: 5px;} }
+}
+
+/**
+ * Recent Launches
+ */
+.recent-launches { margin: 0 45px; overflow: hidden;
+  .swiper-container { margin: 0 -10px; }
+}
+
+/* Launche Item */
+.launche-item { background: $white; border: 1px solid #f0f0f0; color: #7c7c7c; display: block; font-family: $fontTimes; margin: {left: 10px; right: 10px;} min-height: 255px; padding: 14px; text-decoration: none; @include micro-clearfix; 
+  img { background: #f0f0f0; padding: 1px; @include transition(#{background .3s}); }
+  .description { text-align: left; }
+  p { margin-bottom: 7px; }
+  h3 { color: $grey-dark; font: {family: $fontTimes; size: 13px; weight: normal;} letter-spacing: 2px; margin: {top: 10px; bottom: 0;} }
+  .price { color: $grey; font-size: 14px; margin-bottom: 0; }
+
+  /* Hover on Launch */
+  &:hover, &:focus, &:active { background: $white; border-color: $red; 
+    img { background: $red; }
+    h3, .price { color: $red; }
+  }
+}
+
+
+/* ==========================================================================
+   Special Classes
+   ========================================================================== */
+  
+.clearfix { clear: both; @include micro-clearfix; }
+
+.replace { @include hide-text; }
+
+.text-center { text-align: center!important; }
+.text-right { text-align: right!important; }
+
+.no-marg-top { margin-top: 0!important; }
+.no-marg-bottom { margin-bottom: 0!important; }
+
+/* Responsive utility classes */
+.hidden-large { display: none!important; }
+

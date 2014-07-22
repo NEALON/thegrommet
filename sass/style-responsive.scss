@@ -1,0 +1,471 @@
+/*!
+ * Tidal
+ * Project: The Grommet
+ * Date: 11132013
+ * 
+ * Author: Eugene Tsurcan 
+ * Front End Developer 
+ * [http://twitter.com/eugenetsurcan]
+ * 
+ * STYLES RESPONSIVE (Tablets, mobiles) 
+ *  
+ */
+
+
+// ---------------------------------------------------------------------------
+// Imports
+
+@import "compass"; 
+@import "susy";
+@import "mixins";
+@import "variables";
+
+
+/* ==========================================================================
+   Medium devices / tablet (992px and down)
+   ========================================================================== */
+@include at-breakpoint(16 $screen-md-min) { 
+  /* Content Page (With Sidebar) */
+  .content-page { 
+    > section { @include span-columns(18, 29); } 
+    
+    /* Right Sidebar */
+    > aside { @include span-columns(10 omega, 29); } 
+  }
+  
+  /* Post Heading */
+  .post-heading { margin-right: columns(11, 29) + gutter(29); padding-right: 0; }
+  
+  /**
+   * Post Page
+   */
+  .post-page-wrapper { margin-right: 0; 
+    .post-page-body { float: none; }
+    .post-products { float: none; margin: 30px 0 0; width: 100%; @include micro-clearfix;
+      img { @include inline-block; }
+      li { float: left; margin: {bottom: 10px; right: 10px;} width: 117px; }
+    }
+  }
+  
+  /**
+   * Two cols posts
+   */
+  .two-cols-posts { margin-right: 0; }
+  
+  /* Wrapper Load More */
+  .wrapper-load-more { margin-left: columns(11, 18); }
+  
+  /**
+   * Subscribe Widget
+   */
+  .subscribe-widget form { margin: {left: auto; right: auto;} max-width: 100%; width: 240px; }
+  
+  /**
+   * Recent Launches
+   */
+  .recent-launches { margin: 0 3%; }
+  
+  /**
+   * Featured Writers
+   */
+  .featured-writers { margin-right: 0; }
+  
+  /**
+   * Profile Block (wrapper-profile)
+   */
+  .wrapper-profile { margin-right: 0; }
+  
+  /**
+   * Post Flip (as on Section page)
+   */
+  .post-flip {
+    .top-section { margin-right: 0;
+      @include with-grid-settings(2, 473px, 15px, 0) {
+        .wrap-img { @include span-columns(1); }
+        .description { @include span-columns(1 omega); 
+          h3 { margin: {bottom: 20px; top: 15px;} }
+        }
+      }
+    }
+    
+    .bottom-section figcaption { font-size: 17px; }
+  }
+}
+
+/* Medium devices / tablet (920px and down) */
+@include at-breakpoint(16 920px) {
+  /* Menu Main */
+  .menu {
+    a { font-weight: normal; padding: 15px 7px 15px 0; }
+    ul li + li a { padding: 15px 7px; }
+  }
+  
+  /* Post Item (Post small) */
+  .post-item.post-small .btn-share > span { margin-top: 22px; }
+}
+
+/* Medium devices / tablet (830px and down) */
+@include at-breakpoint(16 830px) {
+  /* Post Item (Post small) */
+  .post-item.post-small .btn-share { font-size: 11px;
+    > span { font-size: 16px; margin: {bottom: 11px; top: 17px;} }
+  }
+}
+
+
+/* ==========================================================================
+   Small devices / phone (768px and down)
+   ========================================================================== */
+@include at-breakpoint(16 $screen-sm-min) {
+  body { background: #c2b6a4 image-url("bg-texture.png"); overflow-x: hidden; width: 100%; }
+
+  /* Header */
+  .header { position: relative; z-index: 5; 
+    h1 { float: none; margin-top: 10px; }
+    h2 { margin: {left: 0; right: 0;} }
+  }
+  
+  /* Container page */
+  .container-page { overflow: hidden; width: 100%; }
+  
+  /* Menu Main */ 
+  .menu { float: left; margin-left: -100%; @include opacity(.95); text-align: left; width: 100%; z-index: 2; 
+    a { font-weight: bold; }
+    
+    a, ul li + li a, ul ul li + li a { padding: 10px 3px; }
+    
+    ul { margin-left: 20px;
+      li { float: none; border: 1px solid #736856; border-width: 0; @include border-image(image-url("border.png") 1 1 1 1 repeat); 
+        + li { border-top-width: 1px; }
+        
+        &:hover ul { display: none; }
+      }
+    }
+    
+    /* Submenu */
+    ul ul { background: none transparent; border-width: 0; @include box-shadow(#{none}); margin: 0 0 0 15px; padding: 0; position: static; text-align: left; width: auto; 
+      a { font-weight: normal; text-transform: none; }
+    }
+    
+    .has-dropdown { 
+      > a:before { content: "\f067"; float: right; font-family: 'FontAwesome'; }
+      
+      /* Show Submenu */
+      &.opened { 
+        > a:before { content: "\f068"; } 
+        > ul { display: block; } 
+      }
+    }
+    
+    /* Search Form */
+    .search-form { border-width: 0; margin: {bottom: 20px; left: -20px; top: 20px;} 
+      .input-group { margin: 0; 
+        .wrap-input input { @include border-radius(#{3px 0 0 3px}); max-width: none; }
+        .btn { display: block; }
+      }
+    }
+  }
+  
+  /* Off-Canvas Navigation */
+  .off-canvas-navigation { display: block; }
+  
+  /* Wrapper Content */
+  .wrapper-content { @include box-shadow(#{0 0 25px rgba($black, .3)}); position: relative; z-index: 3; } 
+
+  /* Active Nav */
+  .active-nav {
+    .menu { border-width: 0 0 1px 0; margin-left: 0; width: 80%; }
+    .wrapper-content { border-left: 1px solid #736856; @include border-image(image-url("border.png") 1 1 1 1 repeat); margin-right: -100%; }
+  }
+  
+  /**
+   * Hero (Homeslider)
+   */
+  .hero .swiper-slide { @include opacity(1); }
+  
+  /* Footer */
+  .footer { position: relative; z-index: 5; }
+  
+  /**
+   * Recent Launches
+   */
+  .recent-launches { margin: 0; }
+}
+
+/* Small devices / phone (745px and down) */
+@include at-breakpoint(16 745px) {
+  /**
+   * Typography
+   */
+  h1, .h1 { font-size: 38px; margin: {top: 13px; bottom: 13px;} }
+  h2, .h2 { font-size: 29px; }
+  h3, .h3 { font-size: 18px; }
+  h4, .h4 { font-size: 20px; }
+  h5, .h5 { font-size: 16px; }
+  h6, .h6 { font-size: 11px; }
+  
+  /**
+   * Masthead
+   */
+  .masthead { font-size: 15px;
+    h3 { font-size: 34px; }
+  }
+  
+  /**
+   * Hero (Homeslider)
+   */
+  .hero .description h3 { font-size: 16px; }
+
+  
+  /* Content Page (With Sidebar) */
+  .content-page { 
+    > section { @include span-columns(15, 29); } 
+    
+    /* Right Sidebar */
+    > aside { @include span-columns(12 omega, 29); }
+  }
+  
+  /* Post Heading */
+  .post-heading { margin-right: columns(14, 29) + gutter(29); }
+  
+  /**
+   * Post Page
+   */
+  .post-page-wrapper .post-products li { width: 90px; }
+  
+  /**
+   * Two cols posts
+   */
+  .two-cols-posts {
+    .col { @include reset-columns; }
+  }
+  
+  /**
+   * Three cols posts
+   */
+  .three-cols-posts {
+    @include with-grid-settings(2, 288px, 25px, 0) {
+      .col { @include span-columns(1); @include remove-nth-omega('3n'); @include nth-omega('2n'); }
+    }
+  }
+  
+  /* Wrapper Load More */
+  .wrapper-load-more { margin-left: columns(13, 15); }
+  
+  /**
+   * Hero (Homeslider)
+   */
+  .hero { 
+    .description img { margin-top: 10px; width: 70px; }
+    
+    /* Button Next and Prev */
+    .sprites-arrow-left, .sprites-arrow-right { top: 75px; }
+  }
+  
+  /**
+   * Post Item
+   */
+  .post-item {  
+    /* Wrapper Images */
+    .wrapper-images { max-width: 100%; width: (280px + 96px); }
+    
+    /* Description */
+    .description { clear: both; @include micro-clearfix; 
+      h5 { margin-top: 15px; }
+    }
+  }
+  
+  /* Post Item (Post small) */
+  .post-item.post-small .btn-share > span { margin: {bottom: 15px; top: 25px;} }
+  
+  /**
+   * Recent Launches
+   */
+  
+  /* Launche Item */
+  .launche-item {
+    img { margin: 0 auto; }
+    .description { text-align: center; }
+  }
+  
+  /**
+   * Featured Writers
+   */
+  .featured-writers {
+    @include with-grid-settings(2, 153px, 25px, 0) {
+      > li { @include isolate-grid(1); }
+    }
+    
+    /* Large Featured Writers */
+    &.fw-large {
+      @include with-grid-settings(1, 153px, 25px, 0) {
+        > li { @include isolate-grid(1); }
+      }
+    }
+  }
+  
+  /**
+   * Profile Block (wrapper-profile)
+   */
+  .wrapper-profile {
+    .profile-image, .profile-description { display: block; @include reset-columns; }
+  }
+  
+  /**
+   * Post Flip (as on Section page)
+   */
+  .post-flip {
+    .top-section { margin-bottom: 25px;
+      .wrap-img, .description { @include reset-columns; }
+    }
+   
+    .bottom-section figcaption { font-size: 15px; }
+  }
+}
+
+/* Small devices / phone (600px and down) */
+@include at-breakpoint(16 600px) {
+  /* Content Page (With Sidebar) */
+  .content-page { 
+    > section { display: block; @include reset-columns; } 
+    
+    /* Right Sidebar */
+    > aside { display: block; @include reset-columns; 
+      > section { width: auto; }
+    }
+  }
+  
+  /* Post Heading */
+  .post-heading { margin-right: 0; }
+  
+  /**
+   * Post Page
+   */
+  .post-page-wrapper .post-products li { width: 117px; }
+  
+  /**
+   * Two cols posts
+   */
+  .two-cols-posts {
+    @include with-grid-settings(2, 288px, 25px, 0) {
+      .col { @include span-columns(1); @include nth-omega('2n'); }
+    }
+  }
+  
+  /* Wrapper Load More */
+  .wrapper-load-more { margin-left: 0; }
+  
+  /**
+   * Well
+   */
+  .well { padding: {left: $grid-padding; right: $grid-padding;} }
+  
+  /**
+   * Hero (Homeslider)
+   */
+  
+  /* Button Next and Prev */
+  .hero .sprites-arrow-left, .hero .sprites-arrow-right { top: 55px; }
+  
+  /* Post Item (Post small) */
+  .post-item.post-small .btn-share > span { margin: {bottom: 13px; top: 20px;} }
+  
+  /**
+   * Featured Writers
+   */
+  .featured-writers {
+    @include with-grid-settings(4, 153px, 25px, 0) {
+      > li { @include isolate-grid(1); }
+    }
+    
+    /* Large Featured Writers */
+    &.fw-large {
+      @include with-grid-settings(2, 318px, 25px, 0) {
+        > li { @include isolate-grid(1); }
+      }
+    }
+  }
+  
+  /**
+   * Author Post
+   */
+  .content-page > aside > .author-post { margin: {left: 0; right: 0;} max-width: 100%; width: 360px;
+    .wrap-img { float: left; margin-right: 15px; }
+  }
+  
+  /**
+   * Post Flip (as on Section page)
+   */
+  .post-flip { margin-bottom: 25px;
+    .bottom-section {
+      @include with-grid-settings(2, 229px, 15px, 0) {
+        li { @include isolate-grid(1); margin-bottom: 15px; }
+      }
+    }
+  }
+}
+
+/* Small devices / phone (500px and down) */
+@include at-breakpoint(16 500px) {
+  /**
+   * Two cols posts
+   */
+  .two-cols-posts {
+    .col { display: block!important; float: none!important; margin-right: 0!important; width: auto!important; }
+  }
+  
+  /**
+   * Three cols posts
+   */
+  .three-cols-posts {
+    .col { display: block!important; float: none!important; margin-right: 0!important; width: auto!important; }
+  }
+  
+  /* Post Item (Post small) */
+  .post-item.post-small .btn-share > span { margin: {bottom: 11px; top: 27px;} }
+  
+  /**
+   * Featured Writers
+   */
+  .featured-writers {
+    @include with-grid-settings(2, 153px, 25px, 0) {
+      > li { @include isolate-grid(1); }
+    }
+    
+    /* Large Featured Writers */
+    &.fw-large {
+      @include with-grid-settings(1, 153px, 25px, 0) {
+        > li { @include isolate-grid(1); }
+      }
+    }
+  }
+}
+
+/* Small devices / phone (430px and down) */
+@include at-breakpoint(16 400px) {
+  /**
+   * Masthead
+   */
+  .masthead h3 { font-size: 24px; }
+
+  /**
+   * Hero (Homeslider)
+   */
+  
+  /* Button Next and Prev */
+  .hero .sprites-arrow-left, .hero .sprites-arrow-right { top: 65px; }
+  
+  /**
+   * Author Post
+   */
+  .content-page > aside > .author-post .wrap-img { float: none; margin-right: 0; }
+  
+  /**
+   * Post Page
+   */
+  .post-page-wrapper .post-products li { width: 80px; }
+}
+
+
+
+
